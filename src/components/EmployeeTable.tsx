@@ -19,8 +19,8 @@ const EmployeeTable: React.FC<EmployeeTableProps> = ({ onEdit }) => {
     dispatch(fetchEmployees()); //диспатч экшена для получения массива с сотрудниками
   }, [dispatch]);
 
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) return <div>Загрузка</div>;
+  if (error) return <div>Ошибка: {error}</div>;
 
   return (
     <div className="table-wrapper">
