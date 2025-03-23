@@ -1,0 +1,197 @@
+@import 'variables';
+@import 'mixins';
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font: #{$font-size-base}/1.5 $font-family;
+  color: $text-color;
+  background-color: $background-color;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  
+  th, td {
+    padding: $spacing-medium;
+    text-align: left;
+    border-bottom: 1px solid $border-color;
+  }
+}
+
+.home-page {
+  padding: $spacing-large;
+  max-width: 1200px;
+  margin: 0 auto;
+
+  .addEmployee {
+    @include button-base;
+    background: $primary-color;
+    color: white;
+    margin-bottom: $spacing-medium;
+    transition: background 0.3s ease;
+  
+    &:hover {
+      @include hover-effect($primary-color);
+    }
+  
+    &:active {
+      transform: scale(0.98);
+    }
+  
+    @include mobile {
+      width: 100%;
+      justify-content: center;
+    }
+  
+    svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+  }
+
+  h1 {
+    color: $primary-color;
+    margin-bottom: $spacing-medium;
+    font-size: 2rem;
+  }
+}
+
+.filters {
+  @include card-style;
+  margin-bottom: $spacing-medium;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: $spacing-medium;
+
+  .filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: $spacing-small;
+
+    label {
+      @include flex-center;
+      cursor: pointer;
+      font-weight: 500;
+    }
+
+    input[type="checkbox"] {
+      @include custom-checkbox($primary-color);
+    }
+    
+    select {
+      padding: $spacing-small;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+    }
+  }
+}
+
+.sort-buttons {
+  grid-column: 1 / -1;
+  display: flex;
+  gap: $spacing-medium;
+
+  button {
+    @include button-base;
+    background: $primary-color;
+    color: white;
+
+    &:hover {
+      @include hover-effect($primary-color);
+    }
+  }
+}
+
+.table-wrapper {
+  @include card-style;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+
+  @include mobile {
+    border-radius: 0;
+    margin: 0 -$spacing-large;
+    width: calc(100% + #{$spacing-large * 2});
+  }
+
+  tbody tr {
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: rgba($primary-color, 0.08);
+    }
+
+    &:active {
+      background-color: rgba($primary-color, 0.15);
+    }
+  }
+}
+
+.status {
+  padding: $spacing-small $spacing-medium;
+  border-radius: $border-radius;
+  font-size: 0.875rem;
+  font-weight: 500;
+
+  @each $status, $color in (active: $status-active, archived: $status-archived) {
+    &.#{$status} {
+      background-color: rgba($color, 0.1);
+      color: darken($color, 10%);
+    }
+  }
+}
+
+.employee-form {
+  @include card-style;
+  max-width: 500px;
+  margin: 0 auto;
+
+  .form-group {
+    margin-bottom: $spacing-medium;
+
+    input, select {
+      width: 100%;
+      padding: $spacing-small;
+      border: 1px solid $border-color;
+      border-radius: $border-radius;
+    }
+  }
+
+  button {
+    @include button-base;
+    background: $primary-color;
+    color: $background-color;
+    padding: $spacing-medium;
+    width: 100%;
+
+    &:hover {
+      @include hover-effect($primary-color);
+    }
+  }
+}
+
+.modal-overlay {
+  @include overlay(rgba(0, 0, 0, 0.5));
+}
+
+.modal-content {
+  @include card-style;
+  position: relative;
+  max-width: 500px;
+  width: 100%;
+  margin: $spacing-large;
+}
+
+.error-message {
+  color: $error-color;
+  font-size: 0.875rem;
+  margin-top: $spacing-small;
+}
